@@ -10,8 +10,6 @@ grid_input = "x4y4.*.***.*********"
 #
 grid = Grid(grid_input)
 
-grid.set_number_of_mines()
-
 print(grid)
 
 
