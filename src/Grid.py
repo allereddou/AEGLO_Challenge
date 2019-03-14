@@ -2,15 +2,23 @@ class Grid:
     def __init__(self, grid_string):
         self.x, self.y = self.parse_dimensions(grid_string)
         self.data = self.parse_data(grid_string)
-        self.mined_grid = None
 
     def parse_dimensions(self, grid_string):
-        x = grid_string[1]
-        y = grid_string[3]
-        return int(x), int(y)
+        pos = grid_string.split('x')
+        pos = pos[1].split('y')
+        x = pos[0]
+        y = [str(s) for s in pos[1] if s.isdigit()]
+        output = ""
+        for i in y:
+            output += i
+        return int(x), int(output)
 
     def parse_data(self, grid_string):
-        data = grid_string[4:]
+        if self.x is not self.y:
+            data = grid_string.split(str(self.x))[1].split(str(self.y))[1]
+        else:
+            data = grid_string.split(str(self.x))[2]
+
         if len(data) is not self.x * self.y:
             raise SyntaxError
 

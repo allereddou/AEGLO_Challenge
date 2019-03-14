@@ -2,6 +2,7 @@ from unittest import TestCase, main
 
 from src.Grid import Grid
 
+
 # Tests pour Jérémie :angery:
 class GridTest(TestCase):
     MAX_NUMBER_MINES_AROUND_SQUARE = 8

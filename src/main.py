@@ -1,18 +1,10 @@
 from src.Grid import Grid
 
-grid_input = "x1y1*"
+try:
+    lines = [line.rstrip('\n') for line in open('minesweeper.txt')]
+except FileNotFoundError:
+    raise IOError("File 'minesweeper.txt' needs to exist !")
 
-grid_input = "x2y1*."
-# grid_input = "x2y1**"
-# grid_input = "x1y1*"
-# grid_input = "x3y1.**"
-grid_input = "x4y4..*.......*.*..."
-#
-grid = Grid(grid_input)
-
-print(grid)
-
-
-
-
-
+for line in lines:
+    grid = Grid(line)
+    print(grid)
