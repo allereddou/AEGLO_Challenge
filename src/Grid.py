@@ -1,17 +1,15 @@
+import re
+
 class Grid:
     def __init__(self, grid_string):
         self.x, self.y = self.parse_dimensions(grid_string)
         self.data = self.parse_data(grid_string)
 
     def parse_dimensions(self, grid_string):
-        pos = grid_string.split('x')
-        pos = pos[1].split('y')
-        x = pos[0]
-        y = [str(s) for s in pos[1] if s.isdigit()]
-        output = ""
-        for i in y:
-            output += i
-        return int(x), int(output)
+        pos = re.findall(r'(\D+)(\d+)', grid_string)
+        x = pos[0][1]
+        y = pos[1][1]
+        return int(x), int(y)
 
     def parse_data(self, grid_string):
         if self.x is not self.y:
@@ -20,7 +18,7 @@ class Grid:
             data = grid_string.split(str(self.x))[2]
 
         if len(data) is not self.x * self.y:
-            raise SyntaxError
+            raise SyntaxError("File contains a mistake and thus is unparsable")
 
         output = [[data[self.x * i + j] if data[self.x * i + j] is not '.' else 0 for j in range(self.x)] for i in
                   range(self.y)]
