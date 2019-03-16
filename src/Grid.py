@@ -12,10 +12,8 @@ class Grid:
         return int(x), int(y)
 
     def parse_data(self, grid_string):
-        if self.x is not self.y:
-            data = grid_string.split(str(self.x))[1].split(str(self.y))[1]
-        else:
-            data = grid_string.split(str(self.x))[2]
+
+        data = re.findall(r'(\W+?)', grid_string)
 
         if len(data) is not self.x * self.y:
             raise SyntaxError("File contains a mistake and thus is unparsable")
