@@ -3,9 +3,10 @@ from unittest import TestCase, main
 from src.Grid import Grid
 
 
-# Tests pour Jérémie :angery:
 class GridTest(TestCase):
     MAX_NUMBER_MINES_AROUND_SQUARE = 8
+    MAX_NUMBER_MINES_CENTER_FOR_ROW = 3
+    MAX_NUMBER_MINES_CORNER_FOR_ROW = 2
 
     def test_when_parsing_grid_then_correct_dimensions_are_set(self):
         string = "x1y1*"
@@ -54,6 +55,34 @@ class GridTest(TestCase):
         mined_string = mined_string.replace('\n', '')
 
         self.assertEqual(self.MAX_NUMBER_MINES_AROUND_SQUARE, int(mined_string[middle]))
+
+    def test_when_checking_for_mines_on_sides_then_detects_right_number(self):
+        string = "x1y3.*."
+        grid = Grid(string)
+        mined_string = grid.get_mines_surronding_squares()
+        mined_string = mined_string.replace('\n', '')
+
+        self.assertEqual(int(mined_string[0]), 1)
+        self.assertEqual(int(mined_string[2]), 1)
+
+    def test_when_checking_for_mines_on_top_then_detects_right_number(self):
+        string = "x3y2***..."
+        grid = Grid(string)
+        mined_string = grid.get_mines_surronding_squares()
+        mined_string = mined_string.replace('\n', '')
+
+        self.assertEqual(int(mined_string[4]), self.MAX_NUMBER_MINES_CENTER_FOR_ROW)
+        self.assertEqual(int(mined_string[3]), self.MAX_NUMBER_MINES_CORNER_FOR_ROW)
+
+    def test_when_checking_for_mine_on_bottom_then_detects_rigth_number(self):
+        string = "x3y2...***"
+        grid = Grid(string)
+
+        mined_string = grid.get_mines_surronding_squares()
+        mined_string = mined_string.replace('\n', '')
+
+        self.assertEqual(int(mined_string[1]), self.MAX_NUMBER_MINES_CENTER_FOR_ROW)
+        self.assertEqual(int(mined_string[0]), self.MAX_NUMBER_MINES_CORNER_FOR_ROW)
 
 
 if __name__ == '__main__':

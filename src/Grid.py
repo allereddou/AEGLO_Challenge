@@ -52,12 +52,12 @@ class Grid:
                         if padded_grid[j + 1][i + k] is not "*":
                             padded_grid[j + 1][i + k] += 1
 
-        string_grid = ""
+        mined_grid = ""
         for j in range(1, self.y + 1):
             for i in range(1, self.x + 1):
-                string_grid += str(padded_grid[j][i])
-            string_grid += "\n"
-        return string_grid
+                mined_grid += str(padded_grid[j][i])
+            mined_grid += "\n"
+        return mined_grid
 
     def __str__(self):
         return self.get_mines_surronding_squares()
