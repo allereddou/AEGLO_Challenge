@@ -1,5 +1,6 @@
 import re
 
+
 class Grid:
     def __init__(self, grid_string):
         self.x, self.y = self.parse_dimensions(grid_string)
