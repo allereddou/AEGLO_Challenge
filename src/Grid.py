@@ -16,7 +16,7 @@ class Grid:
 
         data = re.findall(r'(\W+?)', grid_string)
 
-        if len(data) is not self.x * self.y:
+        if len(data) != self.x * self.y:
             raise SyntaxError("File contains a mistake and thus is unparsable")
 
         output = [[data[self.x * i + j] if data[self.x * i + j] is not '.' else 0 for j in range(self.x)] for i in
